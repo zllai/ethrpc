@@ -1,1 +1,1 @@
-module github.com/onrik/ethrpc
+module github.com/zllai/ethrpc
