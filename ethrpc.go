@@ -508,6 +508,21 @@ func (rpc *EthRPC) Eth1() *big.Int {
 	return Eth1()
 }
 
+// Imports the given unencrypted private key (hex string) into the key store, encrypting it with the passphrase.
+func (rpc *EthRPC) PersonalImportRawKey(hexPrivKey, password string) (string, error) {
+	var address string
+	err := rpc.call("personal_importRawKey", &address, hexPrivKey, password)
+	return address, err
+}
+
+// EthSendTransaction creates new message call transaction or a contract creation, if the data field contains code.
+func (rpc *EthRPC) PersonalSendTransaction(transaction T, password string) (string, error) {
+	var hash string
+
+	err := rpc.call("personal_sendTransaction", &hash, transaction, password)
+	return hash, err
+}
+
 // Eth1 returns 1 ethereum value (10^18 wei)
 func Eth1() *big.Int {
 	return big.NewInt(1000000000000000000)
